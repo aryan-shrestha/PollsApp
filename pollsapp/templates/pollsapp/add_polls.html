@@ -1,0 +1,37 @@
+{% extends 'pollsapp/main.html'%}
+
+{% load static %}
+
+{% block content %}
+
+<section class="container">
+    <div class="form-container" style="height: 85vh;">
+        <form class="form-floating custom-form form-grid" action="{% url 'pollsapp:add_polls'%}" method="POST">
+            {% csrf_token %}
+            <img src="{% static 'pollsapp/logo.png'%}" alt="logo" style="margin-top: -2rem; margin-bottom: -2rem;" height="140px" width="auto" class='logo'>
+            <div class="form-floating">
+                <input type="text" class="form-control custom-input" style="margin-bottom: 1rem;" placeholder="Question" id="floatingTextarea" name="question_text">
+                <label for="floatingTextarea" style="color: #696969;">Question</label>
+              </div>
+            <div class="form-floating">
+                <input type="text" class="form-control custom-input" style="margin-bottom: 1rem;" placeholder="choice 1" id="floatingTextarea" name="choice-1">
+                <label for="floatingTextarea" style="color: #696969;">choice 1</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control custom-input" style="margin-bottom: 1rem;" placeholder="choice 2" id="floatingTextarea" name="choice-2">
+                <label for="floatingTextarea" style="color: #696969;">Choice 2</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control custom-input" style="margin-bottom: 1rem;" placeholder="choice 3" id="floatingTextarea" name="choice-3">
+                <label for="floatingTextarea" style="color: #696969;">Choice 3</label>
+              </div>
+              <div class="form-floating">
+                <input type="text" class="form-control custom-input" style="margin-bottom: 1rem;" placeholder="choice 4" id="floatingTextarea" name="choice-4">
+                <label for="floatingTextarea" style="color: #696969;">Choice 4</label>
+              </div>
+              <input type="submit" class="btn btn-outline-success btn-lg submit-btn" value="Create Poll">
+          </form>
+    </div>
+</section>
+
+{% endblock %}

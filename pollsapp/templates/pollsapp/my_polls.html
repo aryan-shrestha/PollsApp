@@ -1,0 +1,32 @@
+{% extends 'pollsapp/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="profile-detail-container">
+        <div>
+            <h1>{{user.username}}</h1>
+            <a href="#"><h3>{{no_of_votes}}</h3>Polls Created</a>
+        </div>
+    </div>
+    <section class="container">
+        <div class="hero-text-container">
+            <h1>Your Polls</h1>
+        </div>
+        <div class="polls-container">
+            {% for poll in polls %}
+                <a href="{% url 'pollsapp:result' poll.id %}"><div class="poll">
+                    <div class="votes">
+                        <p>{{poll.get_total_vote}} vote{{poll.get_total_vote|pluralize}}</p>
+                    </div>
+                    <p class="username">{{poll.user.username}}</p>
+                    <h3>{{poll.question_text}}</h3>
+                    <p>Published on {{poll.pub_date}}</p>
+                </div></a>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
+

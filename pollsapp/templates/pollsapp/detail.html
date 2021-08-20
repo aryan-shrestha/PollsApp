@@ -1,0 +1,29 @@
+{% extends 'pollsapp/main.html'%}
+
+{% load static %}
+
+{% block content%}
+    <section class="container">
+        <div class="polls-container">
+            <div class="poll" style="height: 70vh;z-index: 1;" >
+                <div class="votes" style="top:-4vh;">
+                    <p>{{question.get_total_vote}} vote{{question.get_total_vote|pluralize}}</p>
+                </div>
+                <p class="username">{{user.username}}</p>
+                <h3>{{question.question_text}}</h3>
+                {% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+                <form action="{% url 'pollsapp:vote' question.id %}" method="POST" style=" z-index: 2; display: flex; justify-content: space-between; flex-direction: column;">
+                    {% csrf_token %}
+                   <div class="radio-btns">
+                       {% for choice in question.choice_set.all %}
+                       <input type="radio" class="btn-check" name="choice" value="{{choice.id}}" id="{{choice.id}}" autocomplete="off">
+                       <label class="btn btn-outline-success custom-btn" for="{{choice.id}}">{{choice.choice_text}}</label>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Vote" class="btn btn-outline-primary btn-lg submit-btn custom-btn" 
+                            style="align-self: center; margin-top: 3vh; width: 30vh; height: 7vh; ">
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

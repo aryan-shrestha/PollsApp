@@ -1,0 +1,28 @@
+{% extends 'pollsapp/main.html'%}
+
+{% load static %}
+
+{% block content %}
+    <section class="container">
+        <div class="hero-text-container">
+            <h1>Public Polls</h1>
+            <p>Here are some polls created by Public polls members.</p>
+        </div>
+        <div class="polls-container">
+            {% for question in questions%}
+            <a href="{% url 'pollsapp:detail' question.id%}"><div class="poll">
+                <div class="votes">
+                    <p>{{question.get_total_vote}} vote{{question.get_total_vote|pluralize}}</p>
+                </div>
+                <p class="username">{{question.user.username}}</p>
+                <h3>{{question.question_text}}</h3>
+                <p>Published on {{question.pub_date}}</p>
+            </div></a>
+            {% endfor %}
+        </div>
+    </section>
+    
+{% endblock %}
+
+</body>
+</html>
